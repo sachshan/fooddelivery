@@ -6,10 +6,9 @@ In this project, we aim to implement a food delivery application. Customers can 
 
 | Name | NEU ID          | Email Address                    |
 | --------  | ----------------| ---------------------- |
-| Linwei Shao | 001067027 | shao.li@northeastern.edu |
 | Shantanu Sachdeva | 002748942 | sachdeva.sh@northeastern.edu |
-| Sahithi Bommineni | 002768024 | bommineni.s@northeastern.edu |
-| Shunchang Yu | 002957668 | yu.shun@northeastern.edu |
+| Linwei Shao | 001067027 | shao.li@northeastern.edu |
+
 
 ## Build
 
