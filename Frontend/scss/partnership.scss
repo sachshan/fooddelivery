@@ -1,0 +1,30 @@
+@import 'reused';
+.partnership {
+    background-color: $--jet;
+    overflow-x: hidden;
+  }
+  
+  .partnership .section-title {
+    text-align: center;
+    color: $--white;
+    margin-block-end: 50px;
+  }
+  
+  .partnership-card { position: relative; }
+  
+  .partnership-card .card-banner {
+    outline: 7px solid $--red;
+    border-radius: $--radius-20;
+    margin: 7px;
+  }
+  
+  .partnership-card .card-title {
+    color: $--white;
+    margin-block-end: 10px;
+  }
+  
+  .partnership-card .card-content {
+    position: absolute;
+    bottom: -20px;
+    left: 20px;
+  }

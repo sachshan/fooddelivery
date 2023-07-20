@@ -1,0 +1,194 @@
+@import 'reused';
+@media (min-width: 575px) {
+
+    :root {
+  
+      --fs-6: 4.2rem;
+  
+    }
+  
+  
+    /* reused */
+  
+    .container {
+      max-width: 550px;
+      width: 100%;
+      margin-inline: auto;
+    }
+  
+    .h1 { --fs-2: 6rem; }
+  
+    .h2 { --fs-2: 4.8rem; }
+  
+  
+  
+    /* main */
+  
+    .main-banner { position: relative; }
+  
+    .main .shape {
+      display: block;
+      position: absolute;
+      box-shadow: $--shadow-2;
+      border-radius: $--radius-20;
+    }
+  
+    .main .shape-1 {
+      left: 0;
+      bottom: 60px;
+    }
+  
+    .main .shape-2 {
+      top: 60px;
+      right: -10px;
+    }
+  
+    /* partnership */
+  
+    .partnership-card .card-content { left: 40px; }
+  
+    .partnership-card .card-title { --fs-8: 3.5rem; }
+  
+  }
+  
+  
+  @media (min-width: 768px) {
+  
+    /* reused */
+  
+    .container { max-width: 720px; }
+  
+    .grid-list { grid-template-columns: 1fr 1fr; }
+  
+  
+  
+    /* header */
+  
+    .navbar {
+      max-width: 428px;
+      left: -430px;
+    }
+  
+    .overlay {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: $--black;
+      z-index: 1;
+      opacity: 0;
+      transition: $--transition-1;
+      visibility: hidden;
+    }
+  
+    .overlay.active {
+      visibility: visible;
+      opacity: 0.7;
+    }
+  
+  
+  
+    /* restaurant */
+  
+    :is(.top-restaurant) .grid-list { align-items: center; }
+  
+  }
+  
+  
+  @media (min-width: 992px) {
+  
+    /* reused */
+  
+    .container { max-width: 960px; }
+  
+    
+  
+    /* main */
+  
+    .main .container {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 30px;
+    }
+  
+    .main .shape-1 { bottom: 30px; }
+  
+    .main .shape-2 {
+      top: 80px;
+      right: -40px;
+    }
+  
+    /* footer */
+  
+    .footer-top { grid-template-columns: 1fr 0.5fr 1fr; }
+  
+  }
+  
+  
+  @media (min-width: 1200px) {
+  
+    :root {
+  
+      --fs-6: 4.8rem;
+  
+    }
+  
+    /* reused */
+  
+    .container { max-width: 1140px; }
+  
+    /* header */
+  
+    .navbar,
+    .navbar.active {
+      all: unset;
+      display: block;
+    }
+  
+    .navbar .logo,
+    .overlay { display: none; }
+  
+    .navbar-item { border-block-end: none; }
+  
+    .navbar-list {
+      display: flex;
+      gap: 40px;
+    }
+  
+    .header .container { gap: 60px; }
+  
+    .navbar-link { transition: $--transition-1; }
+  
+    .navbar-link:is(:hover, :focus-visible) { color: $--red; }
+  
+    .header .btn-primary { display: block; }
+  
+    .header-action {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+  
+    .cart-btn {
+      background-color: $--white;
+      border-radius: $--radius-10;
+    }
+  
+  }
+  
+  .login-form{
+    display:flex;
+    justify-content: center;
+  }
+  label{
+    text-align: center;
+  }
+  .registerlink{
+    display:inline;
+  }
+  
+  .registerlink:hover{
+    color:$--red;
+  }

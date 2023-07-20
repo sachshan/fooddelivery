@@ -1,0 +1,58 @@
+@import 'reused';
+
+.restaurant-card { padding: 20px; }
+
+.restaurant-card .card-icon {
+  width: 100px;
+  border-radius: $--radius-15;
+  overflow: hidden;
+  margin-block-end: 20px;
+}
+
+.restaurant-card .rating-wrapper { margin-block-start: 5px; }
+
+.restaurant-card .card-meta-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.restaurant-card .card-meta {
+  color: $--red;
+  font-size: $--fs-11;
+  border: 1px solid;
+  padding: 5px 15px;
+  border-radius: $--radius-10;
+  margin-block: 15px 20px;
+  transition: $--transition-1;
+}
+
+.restaurant-card .card-meta:is(:hover, :focus-visible) {
+  background-color: $--red;
+  color: $--white;
+}
+
+.top-restaurant .btn {
+  margin-inline: auto;
+  margin-block-start: 40px;
+}
+
+.restname{
+  text-align: left;
+  border: none;
+}
+
+.restname:hover{
+  cursor: pointer;
+  color: $--red;
+}
+
+.ratingstar{
+  display: inline-block; 
+  margin-left: 5px;
+}
+
+.rating-text{
+  display: flex; 
+  align-items: center;
+}

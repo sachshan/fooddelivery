@@ -1,0 +1,11 @@
+@import 'reused';
+.main { padding-block-start: calc(var(--section-padding) + 5px); }
+
+.main .container {
+  display: grid;
+  gap: 80px;
+}
+
+.main-text { margin-block: 8px 40px; }
+
+.main .shape { display: none; }

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>NUEats - The Best Food Delivery App at NEU</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <!-- 
+    preloader
+  -->
+
+  <div class="loading-container" data-loading-container>
+    <div class="loading-circle"></div>
+  </div>
+
+  <!-- 
+    header
+  -->
+
+  <header class="header" data-header>
+    <div class="container">
+
+      <a href="/home" id="titlelogo" class="logo">
+        <span style="color:hsl(10, 96%, 48%)">NU</span>EATS
+      </a>
+
+      <nav class="navbar" data-navbar>
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <a href="/home" class="navbar-link" data-nav-link>Home</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="/restaurant" class="navbar-link" data-nav-link>Restaurants</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#footer" class="navbar-link" data-nav-link>Contacts</a>
+          </li>
+
+        </ul>
+      </nav>
+
+      <div class="header-action">
+        <a href="/login" class="navbar-link">Logout</a>
+        <form id="mupdate-form" action="/order" method="POST" class="form">
+          <input type="hidden" name="loginname" value="<%= loginname %>">  
+          <button class="btn btn-primary has-after">User Dashboard</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+   <!-- 
+    cart items
+  -->
+
+      <section id="cart" class="section top-restaurant" aria-labelledby="top-restaurent-label">
+        <div class="container">
+          <center><h1 class="h5 card-title">Welcome!</h1></center>
+          <center><h1 class="h5 card-title" id="loginname"><%= loginname %></h1></center>
+          <br>
+          <ul class="grid-list">
+            
+            <% cartitems.forEach(function(cartitem) { %>
+              <li>
+                <div class="cart-card">
+                  <div class="card-icon">
+                    <img src="<%= cartitem.image %>" width="100" height="100" loading="lazy"
+                      alt="<%= cartitem.restaurantname %>" class="w-100">
+                  </div>
+                  <div class="cart-item-details">
+                    <h3 class="h5 card-title"><%= cartitem.cname %></h3>
+                    <h3 class="cart-price">$<%= cartitem.price %></h3>
+                  </div>
+                  <form id="mupdate-form" action="/deletecart" method="POST" class="form">
+                    <input type="hidden" name="loginname" value="<%= loginname %>">  
+                    <input type="hidden" name="cartitemid" value="<%= cartitem._id %>">
+                    <button class="trash-btn" aria-label="trash">
+                      <ion-icon name="trash-outline" aria-hidden="true"></ion-icon>
+                    </button>
+                  </form>
+                </div>
+              </li>
+              <% }); %>
+            
+
+          </ul>
+
+        </div>
+        <form id="mupdate-form" action="/placeorder" method="POST" class="form">
+          <input type="hidden" name="loginname" value="<%= loginname %>">  
+          <button class="btn btn-secondary has-after">Place Order</button>
+        </form>
+        
+          
+      </section>
+
+<!-- 
+    - #FOOTER
+  -->
+
+  <footer id="footer" class="footer">
+    <div class="container">
+
+      <div class="section footer-top grid-list">
+
+        <div class="footer-brand">
+
+          <a href="/home" id="footerlogo" class="logo">
+            <span style="color:hsl(10, 96%, 48%)">NU</span>EATS
+          </a>
+
+          <h2 class="h2 section-title">The Best Restaurants in Your Home</h2>
+
+          <p class="section-text">
+            Vitae congue mauris rhoncus aenean. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere.
+            Tempus egestas sed sed risus pretium quam.
+          </p>
+
+        </div>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title h5">Links</p>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <span class="span">Home</span>
+
+              <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="/restaurant" class="footer-link">
+              <span class="span">Restaurants</span>
+
+              <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#footer" class="footer-link">
+              <span class="span">Contacts</span>
+
+              <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title h5">Contacts</p>
+          </li>
+
+          <li>
+            <address class="address">
+              <ion-icon name="location" aria-hidden="true"></ion-icon>
+
+              <span class="span">360 Huntington Ave, Boston, MA 02115, United States</span>
+            </address>
+          </li>
+
+          <li>
+            <a href="mailto:quickeat@mail.net" class="footer-link">
+              <ion-icon name="mail" aria-hidden="true"></ion-icon>
+
+              <span class="span">nueats@northeastern.edu</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="tel:+12344567890" class="footer-link">
+              <ion-icon name="call" aria-hidden="true"></ion-icon>
+
+              <span class="span">+1 234 456 78 90</span>
+            </a>
+          </li>
+
+          <li>
+            <ul class="social-list">
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <p class="copyright">
+          Copyright@2023 INFO6150 Group NUEats
+        </p>
+
+      </div>
+
+    </div>
+  </footer>
+
+<!-- 
+    - custom js link
+  -->
+  <script src="/assets/js/homepage.js"></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>

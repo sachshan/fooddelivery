@@ -1,0 +1,65 @@
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #777;
+}
+  
+input {
+    border: 1px solid #eeeeee;
+    padding: 12px;
+    outline: none;
+    max-width: 75%;
+}
+  
+button {
+    cursor: pointer;
+    padding: 12px;
+    background: #7C5CBF;
+    border: none;
+    color: white;
+    font-size: 20px;
+    transition: background .3s ease;
+}
+  
+  button:hover {
+    background: #6b47b8;
+}
+  
+  button:disabled {
+    cursor: default;
+    background: #7c5cbf94;
+}
+
+.cform {
+    display: flex;
+    flex-shrink: 0;
+    margin-top: 16px;
+    padding: 24px;
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+
+}
+
+.cform form {
+    display: flex;
+    flex-grow: 1;
+    margin-right: 16px;
+    
+}
+
+.cform input {
+    border: 1px solid #eeeeee;
+    width: 100%;
+    padding: 12px;
+    margin: 0 16px 0 0;
+    flex-grow: 1;
+    font-size: 20px;
+}
+
+.cform button {
+    margin-right: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+

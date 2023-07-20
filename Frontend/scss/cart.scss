@@ -1,0 +1,46 @@
+@import 'reused';
+.cart-card{
+    display:flex;
+    align-items: center;
+  }
+
+.cart-card .card-icon {
+    display:inline-block;
+    width: 50px;
+    border-radius: $--radius-15;
+    overflow: hidden;
+    margin-right: 20px;
+  }
+
+.cart-card .card-title{
+    display:inline-block; 
+    margin-right: 20px;
+    vertical-align: middle;
+  }
+
+.cart-card .cart-price{
+  display:inline-block; 
+}
+.cart-card button{
+    display:inline-block; 
+}  
+
+.trash-btn {
+    color: $--red;
+    font-size: 4rem;
+    margin-left: auto;
+    }
+
+.status-holder button{
+        display:inline; 
+        margin:10px;
+      }
+.status-holder {
+      margin-left: 10px;}
+
+.cart-item-details {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>NUEats - The Best Food Delivery App at NEU</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <!-- 
+    preloader
+  -->
+
+  <div class="loading-container" data-loading-container>
+    <div class="loading-circle"></div>
+  </div>
+
+  <!-- 
+    header
+  -->
+
+  <header class="header" data-header>
+    <div class="container">
+
+      <a href="/home" id="titlelogo" class="logo">
+        <span style="color:hsl(10, 96%, 48%)">NU</span>EATS
+      </a>
+
+      <nav class="navbar" data-navbar>
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <a href="/restaurant" class="navbar-link" data-nav-link>Restaurants</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#footer" class="navbar-link" data-nav-link>Contacts</a>
+          </li>
+
+        </ul>
+      </nav>
+
+      <div class="header-action">
+        <h3 class="h5 card-title">Welcome! <%= loginname %></h3>
+        <a href="/login" class="navbar-link">Logout</a>
+        <form id="cart-portal" action="/cart" method="GET" class="form">
+          <input type="hidden" name="loginname" value="<%= loginname %>">  
+          <button class="cart-btn" aria-label="cart">
+            <ion-icon name="bag" aria-hidden="true"></ion-icon>
+          </button>
+        </form> 
+        
+      </div>
+    </div>
+  </header>
+
+  
+     <!-- 
+        - #TOP RESTAURANT
+      -->
+
+      <section id="restaurant" class="section top-restaurant" aria-labelledby="top-restaurent-label">
+        <div class="container">
+        
+          <div class="grid-container">
+
+              <form action="/search" method="GET" class="form">
+                <label for="keyword" class="h5 card-title">Search for a restaurant</label><br>
+                <input type="text" name="keyword" style="height: 40px;">
+                <button class="btn btn-secondary has-after">Search</button>
+              </form>
+
+          <!-- Display matching restaurants -->
+          
+          <% for (let i = 0; i < restaurants.length; i++) {
+            const restaurant = restaurants[i];
+            if (
+            restaurant.rname.toLowerCase().includes(keyword.toLowerCase()) || // check if keyword matches rname (case-insensitive)
+            restaurant.tag1.toLowerCase().includes(keyword.toLowerCase()) || // check if keyword matches tag1 (case-insensitive)
+            restaurant.tag2.toLowerCase().includes(keyword.toLowerCase()) || // check if keyword matches tag2 (case-insensitive)
+            restaurant.desc.toLowerCase().includes(keyword.toLowerCase()) // check if keyword matches desc (case-insensitive)
+            ) { %>
+                <li data-reveal="right">
+                  <div class="restaurant-card">
+                    <div class="card-icon">
+                      <img src="<%= restaurant.image %>" width="100" height="100" loading="lazy" alt="<%= restaurant.rname %>" class="w-100">
+                    </div>
+                    <form action="/restaurantDetail" method="GET" class="form">
+                      <input type="submit" name="rname" class="h5 card-title restname" value="<%= restaurant.rname %>">
+                    </form> 
+                    <div class="rating-wrapper">
+                      <p class="card-text rating-text">
+                        Rating:
+                        <% 
+                          const rating = Math.round(restaurant.rating * 2) / 2;
+                          const fullStars = Math.floor(rating);
+                          const halfStars = rating % 1 === 0.5 ? 1 : 0;
+                          const emptyStars = 5 - fullStars - halfStars;
+                        %>
+                        <% for(let i = 0; i < fullStars; i++) { %>
+                          <ion-icon name="star" aria-hidden="true" class="ratingstar"></ion-icon>
+                        <% } %>
+                        <% for(let i = 0; i < halfStars; i++) { %>
+                          <ion-icon name="star-half-outline" aria-hidden="true" class="ratingstar"></ion-icon>
+                        <% } %>
+                        <% for(let i = 0; i < emptyStars; i++) { %>
+                          <ion-icon name="star-outline" aria-hidden="true" class="ratingstar"></ion-icon>
+                        <% } %>
+                      </p>
+                    </div>
+                    <div class="card-meta-wrapper">
+                      <a href="#" class="card-meta"><%= restaurant.tag1 %></a>
+                      <a href="#" class="card-meta"><%= restaurant.tag2 %></a>
+                    </div>
+                    <p class="card-text">
+                      <%= restaurant.desc %>
+                    </p>
+                  </div>
+                </li>
+              <% if ((i + 1) % 2 === 0) { %>
+                </ul>
+                <ul class="restaurant-list">
+              <% } %>
+            <% }
+          } %>
+        
+        </div>
+      </section>
+
+<!-- 
+    - #FOOTER
+  -->
+
+  <footer id="footer" class="footer">
+    <div class="container">
+
+      <div class="section footer-top grid-list">
+
+        <div class="footer-brand">
+
+          <a href="#" id="footerlogo" class="logo">
+            <span style="color:hsl(10, 96%, 48%)">NU</span>EATS
+          </a>
+
+          <h2 class="h2 section-title">The Best Restaurants in Your Home</h2>
+
+          <p class="section-text">
+            Vitae congue mauris rhoncus aenean. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere.
+            Tempus egestas sed sed risus pretium quam.
+          </p>
+
+        </div>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title h5">Links</p>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">
+              <span class="span">Home</span>
+
+              <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="/restaurant" class="footer-link">
+              <span class="span">Restaurants</span>
+
+              <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#footer" class="footer-link">
+              <span class="span">Contacts</span>
+
+              <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title h5">Contacts</p>
+          </li>
+
+          <li>
+            <address class="address">
+              <ion-icon name="location" aria-hidden="true"></ion-icon>
+
+              <span class="span">360 Huntington Ave, Boston, MA 02115, United States</span>
+            </address>
+          </li>
+
+          <li>
+            <a href="mailto:quickeat@mail.net" class="footer-link">
+              <ion-icon name="mail" aria-hidden="true"></ion-icon>
+
+              <span class="span">nueats@northeastern.edu</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="tel:+12344567890" class="footer-link">
+              <ion-icon name="call" aria-hidden="true"></ion-icon>
+
+              <span class="span">+1 234 456 78 90</span>
+            </a>
+          </li>
+
+          <li>
+            <ul class="social-list">
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+              </li>
+
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <p class="copyright">
+          Copyright@2023 INFO6150 Group NUEats
+        </p>
+
+      </div>
+
+    </div>
+  </footer>
+
+<!-- 
+    - custom js link
+  -->
+  <script src="/assets/js/homepage.js"></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>

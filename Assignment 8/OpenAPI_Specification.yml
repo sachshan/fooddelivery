@@ -1,0 +1,694 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: NUEats API
+  description: A food delivery application for customers, restaurant owners, and delivery persons
+
+tags:
+  - name: Customer
+    description: Customer API
+  - name: Restaurant
+    description: Restaurant API
+  - name: Order
+    description: Order API
+  - name: Delivery
+    description: Delivery API
+
+paths:
+  /customer/register:
+    post:
+      summary: Register a new user account
+      tags:
+        - Customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                  format: password
+                address:
+                  type: string
+              required:
+                - name
+                - email
+                - password
+                - address
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+  /customer/login:
+    post:
+      summary: Login to an existing user account
+      tags:
+        - Customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                  format: password
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+          
+  /customer/{customer_id}:
+    get:
+      summary: Get the details of an existing user account
+      tags:
+        - Customer      
+      parameters:
+        - name: customer_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    description: Customer ID
+                    type: integer
+                    example: 123
+                  name: 
+                    description: Customer name
+                    type: string
+                    example: John Doe
+                  email:
+                    description: Customer email
+                    type: string
+                    example:
+                  address:
+                    description: Customer address
+                    type: string
+                    example: 123 Main Street
+        '400':
+          description: Bad request
+  /customer/{customer_id}/updateProfile:
+    put:
+      summary: Update the details of an existing user account
+      tags:
+        - Customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                field:
+                  type: string
+                value:
+                  type: string
+              required:
+                - id
+                - field
+                - value
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+  
+  /restaurant/register:
+    post:
+      summary: Register a new restaurant account
+      tags:
+        - Restaurant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                  format: password
+                address:
+                  type: string
+                hours:
+                  type: string
+              required:
+                - name
+                - email
+                - password
+                - address
+                - hours
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+  /restaurant/login:
+    post:
+      summary: Login to an existing restaurant account
+      tags:
+        - Restaurant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                  format: password
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+  /restaurant/{restaurant_id}:
+    get:
+      summary: Get the details of an existing restaurant account
+      tags:
+        - Restaurant      
+      parameters:
+        - name: restaurant_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    description: Restaurant ID
+                    type: integer
+                    example: 123
+                  name: 
+                    description: Restaurant name
+                    type: string
+                    example: McDonalds
+                  email:
+                    description: Restaurant email
+                    type: string
+                    example: 
+                  address:
+                    description: Restaurant address
+                    type: string
+                    example: 234 Main Street
+                  hours:
+                    description: Restaurant hours
+                    type: string
+                    example: 9am-9pm
+        '400':
+          description: Bad request
+  /restaurant/{restaurant_id}/updateProfile:
+    put:
+      summary: Update the details of an existing restaurant account
+      tags:
+        - Restaurant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                field:
+                  type: string
+                value:
+                  type: string
+              required:
+                - id
+                - field
+                - value
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+  /restaurant/{restaurant_id}/addMenuItem:
+    post:
+      summary: Add a new menu item to an existing restaurant account
+      tags:
+        - Restaurant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                restaurant_id:
+                  type: integer
+                name:
+                  type: string
+                price:
+                  type: number
+                  format: float
+                description:
+                  type: string
+              required:
+                - restaurant_id
+                - name
+                - price
+                - description
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+  /restaurant/{restaurant_id}/updateMenuItem:
+    put:
+      summary: Update the details of an existing menu item
+      tags:
+        - Restaurant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                restaurant_id:
+                  type: integer
+                item_id:
+                  type: integer
+                field:
+                  type: string
+                value:
+                  type: string
+              required:
+                - restaurant_id
+                - item_id
+                - field
+                - value
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+  /restaurant/{restaurant_id}/viewMenu:
+    get:
+      summary: View the menu of an existing restaurant account
+      tags:
+        - Restaurant      
+      parameters:
+        - name: restaurant_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    description: Restaurant ID
+                    type: integer
+                    example: 123
+                  name: 
+                    description: Restaurant name
+                    type: string
+                    example: McDonalds
+                  email:
+                    description: Restaurant email
+                    type: string
+                    example: 
+                  address:
+                    description: Restaurant address
+                    type: string
+                    example: 234 Main Street
+                  hours:
+                    description: Restaurant hours
+                    type: string
+                    example: 9am-9pm
+                  menu:
+                  # multiple items here as example
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Menu item ID
+                          type: integer
+                          example: 123
+                        name: 
+                          description: Menu item name
+                          type: string
+                          example: Big Mac
+                        price:
+                          description: Menu item price
+                          type: number
+                          format: float
+                          example: 5.99
+                        description:
+                          description: Menu item description
+                          type: string
+                          example: A delicious burger
+        '400':
+          description: Bad request
+  /order/create:
+    post:
+      summary: Create a new order
+      tags:
+        - Order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customer_id:
+                  type: integer
+                restaurant_id:
+                  type: integer
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      item_id:
+                        type: integer
+                      quantity:
+                        type: integer
+                address:
+                  type: string
+              required:
+                - customer_id
+                - restaurant_id
+                - items
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+  /order/{order_id}/update:
+    put:
+      summary: Update the details of an existing order
+      tags:
+        - Order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_id:
+                  type: integer
+                field:
+                  type: string
+                value:
+                  type: string
+              required:
+                - order_id
+                - field
+                - value
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+  /order/{order_id}:
+    get:
+      summary: Get the details of an existing order
+      tags:
+        - Order      
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    description: Order ID
+                    type: integer
+                    example: 123
+                  customer_id:
+                    description: Customer ID
+                    type: integer
+                    example: 123
+                  restaurant_id:
+                    description: Restaurant ID
+                    type: integer
+                    example: 123
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        item_id:
+                          type: integer
+                        quantity:
+                          type: integer
+                  status:
+                    description: Order status
+                    type: string
+                    example: Pending
+                  delivery_address:
+                    description: Delivery address
+                    type: string
+                    example: 234 Main Street
+                  delivery_person_id:
+                    description: Delivery person ID
+                    type: integer
+                    example: 123
+                  delivery_person_name:
+                    description: Delivery person
+                    type: string
+                    example: John Smith
+                  total:
+                    description: Order total
+                    type: number
+                    format: float
+                    example: 5.99
+        '400':
+          description: Bad request
+  /order/{order_id}/update/addItem:
+    put:
+      summary: Add an item to an existing order
+      tags:
+        - Order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_id:
+                  type: integer
+                item_id:
+                  type: integer
+                quantity:
+                  type: integer
+              required:
+                - order_id
+                - item_id
+                - quantity
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+  /order/{order_id}/update/removeItem:
+    put:
+      summary: Remove an item from an existing order
+      tags:
+        - Order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_id:
+                  type: integer
+                item_id:
+                  type: integer
+              required:
+                - order_id
+                - item_id
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+  /order/{order_id}/submit:
+    put:
+      summary: Submit an existing order
+      tags:
+        - Order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_id:
+                  type: integer
+              required:
+                - order_id
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+  /order/{order_id}/update/status:
+    put:
+      summary: Update the status of an existing order
+      tags:
+        - Order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_id:
+                  type: integer
+                status:
+                  type: string
+              required:
+                - order_id
+                - status
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+  /order/{order_id}/delete:
+    delete:
+      summary: Delete an existing order
+      tags:
+        - Order
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+  /delivery/accept:
+    post:
+      summary: Accept a delivery
+      tags:
+        - Delivery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_id:
+                  type: integer
+                delivery_person_id:
+                  type: integer
+                delivery_person_name:
+                  type: string
+              required:
+                - order_id
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+  /delivery/{delivery_id}/update/status:
+    put:
+      summary: Update the status of an existing delivery
+      tags:
+        - Delivery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                delivery_id:
+                  type: integer
+                status:
+                  type: string
+              required:
+                - delivery_id
+                - status
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+  /delivery/{delivery_id}/delete:
+    delete:
+      summary: Remove a delivery person for an existing order
+      tags:
+        - Delivery
+      parameters:
+        - name: delivery_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
